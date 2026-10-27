@@ -1,0 +1,42 @@
+services:
+  django:
+    build: ./django/
+    volumes:
+      - ./django/app/:/app
+      - static_volume:/app/static
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DJANGO_SECRET=${DJANGO_SECRET}
+    depends_on:
+      postgreSQL:
+        condition: service_healthy
+  postgreSQL:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 2s
+  nginx:
+    image: nginx
+    ports:
+      - '443:443'
+    volumes:
+      - ./.nginx/:/etc/nginx/conf.d
+      - ./.nginx/certs/:/etc/nginx/certs
+      - static_volume:/static
+    depends_on:
+      - django
+volumes:
+  postgresql_data:
+  static_volume:
