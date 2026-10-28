@@ -5,13 +5,13 @@
  - Собрана многоконтейнерная архитектура (Django + Gunicorn + Nginx + PostgreSQL)
  - Настроен `Healthcheck` для БД, чтобы Django не запускался до готовности Postgres.
  - Настроено сетевое взаимодействие между контейнерами.
- - Настроен HTTPS (самоподписанный сертификат)через Nginx.
+ - Настроен HTTPS (самоподписанный сертификат) через Nginx.
  - Выполнена миграция с SQLite на PostgreSQL.
 ## Содержание
  - [Технологии](#технологии)
  - [Установка и запуск](#установка-и-запуск)
 ## Технологии
- - [Docker / Docker Compose](https://www.docker.com/) - контейнеризации приложений и оркестрация.
+ - [Docker / Docker Compose](https://www.docker.com/) - контейнеризация приложений и оркестрация.
  - [Django](https://www.djangoproject.com/) - веб-фреймворк.
  - [Gunicorn](https://gunicorn.org/) - WSGI сервер.
  - [Nginx](https://nginx.org/) - proxy сервер.
@@ -42,7 +42,7 @@
  docker compose up -d --build
  ```
  Приложение будет доступно: 
- - В браузере сервера:`https://localhost`
+ - В браузере сервера: `https://localhost`
  - По IP-адресу в локальной сети: `https://<IP_сервера>`
 
 
