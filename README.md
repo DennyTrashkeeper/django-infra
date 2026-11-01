@@ -29,6 +29,8 @@
  DB_USER=django_user
  DB_PASSWORD=your_password
  DJANGO_SECRET=django_secret_key
+ ALLOWED_HOSTS=<IP_сервера>, <IP_другого_сервера>*
+ CSRF_TRUSTED_ORIGINS=https://<IP_сервера>, https://<IP_другого_сервера>*
  ```
  3. Создайте или переместите сертификаты сайта в .nginx/certs
  ```bash
