@@ -26,7 +26,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv('ALLOWED_HOSTS','').split(',')
+    if host.strip()
+]
 
 
 # Application definition
@@ -127,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CSRF_TRUSTED_ORIGINS =[
+        origin.strip()
+        for origin in os.getenv('CSRF_TRUSTED_ORIGINS','').split(',')
+        if origin.strip()
